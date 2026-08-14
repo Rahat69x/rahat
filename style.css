@@ -2843,6 +2843,10 @@ button.ghost-icon:focus-visible {
     color: var(--green-4);
 }
 
+.sc-tg {
+    color: #229ED9;
+}
+
 .sc-pin {
     color: var(--orange-4);
 }
@@ -3113,6 +3117,13 @@ button.ghost-icon:focus-visible {
     font-family: var(--font-mono);
     font-size: .875rem;
     font-weight: 700;
+    color: var(--text);
+    text-decoration: none;
+    transition: color .2s;
+}
+
+.f-mail:hover {
+    color: var(--cyan-4);
 }
 
 /* =========================

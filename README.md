@@ -118,6 +118,9 @@ No package manager, dependencies, or build step required.
 **Mahamudol Hasan Rahat**
 * **University:** East West University (B.Sc. in CSE)
 * **Focus:** Web Development & Cybersecurity
+* **Email:** [rahat4528.univ@gmail.com](mailto:rahat4528.univ@gmail.com)
+* **WhatsApp:** [+880 164 183 4481](https://wa.me/8801641834481)
+* **Telegram:** [+880 164 183 4481](https://t.me/+8801641834481)
 * **GitHub:** [@Rahat69x](https://github.com/Rahat69x)
 * **Website:** [rahat69x.vercel.app](https://rahat69x.vercel.app)
 
