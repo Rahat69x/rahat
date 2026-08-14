@@ -244,7 +244,7 @@ document.querySelectorAll(".reveal, .reveal-left, .reveal-right")
 // =========================
 
 const counterEl = document.getElementById("proj-counter");
-const PROJECT_COUNT = 3;
+const PROJECT_COUNT = 4;
 
 const counterObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
