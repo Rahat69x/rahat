@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NetSentry — Network Ops Console · Rahat</title>
+    <meta name="description"
+        content="NetSentry — a live network-monitoring ops console: host discovery, radar sweep, a working port scanner and streaming threat alerts. Built by Rahat with plain HTML, CSS and JS.">
+    <meta name="theme-color" content="#030303">
+    <link rel="icon"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23030303'/%3E%3Ccircle cx='32' cy='32' r='18' fill='none' stroke='%2322d3ee' stroke-width='3'/%3E%3Ccircle cx='32' cy='32' r='4' fill='%2322d3ee'/%3E%3C/svg%3E">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&family=Geist+Mono:wght@400;500;600;700&family=Monoton&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../_shared/lab.css">
+    <link rel="stylesheet" href="style.css">
+
+    <script>
+        (function () {
+            var t = "dark";
+            try { t = localStorage.getItem("theme") || "dark"; } catch (e) { }
+            document.documentElement.setAttribute("data-theme", t);
+        })();
+    </script>
+</head>
+
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="grain" aria-hidden="true"></div>
+
+    <!-- ===== Top bar ===== -->
+    <header class="lab-nav" style="--accent: var(--cyan-4)">
+        <a class="lab-back" href="../../index.html#projects">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M19 12H5"></path>
+                <path d="m12 19-7-7 7-7"></path>
+            </svg>
+            <span>Portfolio</span>
+        </a>
+
+        <div class="lab-brand">
+            <span class="dot"></span>
+            <span>
+                <span class="lab-title">NetSentry</span>
+                <span class="lab-kicker">Network Ops Console</span>
+            </span>
+        </div>
+
+        <div class="lab-spacer"></div>
+
+        <div class="lab-nav-actions">
+            <span class="lab-tag">simulated telemetry</span>
+            <button class="theme-toggle ghost-icon" aria-label="Toggle theme">
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round">
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+                </svg>
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <main id="main" class="ns-wrap">
+
+        <!-- ===== Command bar ===== -->
+        <section class="ns-command rise">
+            <div class="ns-cmd-left">
+                <h1>Operations Center</h1>
+                <p class="ns-cmd-sub">Live view of a monitored <span class="mono">/24</span> segment ·
+                    <span id="ns-clock" class="mono">--:--:--</span>
+                </p>
+            </div>
+            <div class="ns-cmd-controls">
+                <div class="ns-threat" id="ns-threatlevel" data-level="guarded">
+                    <span class="ns-threat-lbl">Threat level</span>
+                    <span class="ns-threat-val" id="ns-threat-val">Guarded</span>
+                </div>
+                <button class="btn btn-ghost" id="ns-pause" aria-pressed="false">
+                    <svg id="ns-pause-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="6" y="4" width="4" height="16"></rect>
+                        <rect x="14" y="4" width="4" height="16"></rect>
+                    </svg>
+                    <span id="ns-pause-txt">Pause feed</span>
+                </button>
+                <button class="btn btn-primary" id="ns-incident">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                        <path d="M12 9v4M12 17h.01"></path>
+                    </svg>
+                    <span>Simulate incident</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- ===== KPI tiles ===== -->
+        <section class="ns-kpis" aria-label="Key metrics">
+            <div class="ns-kpi rise d1">
+                <span class="ns-kpi-lbl">Hosts online</span>
+                <span class="ns-kpi-val" id="kpi-hosts">0</span>
+                <span class="ns-kpi-spark"><canvas data-spark="hosts"></canvas></span>
+            </div>
+            <div class="ns-kpi rise d2">
+                <span class="ns-kpi-lbl">Open ports</span>
+                <span class="ns-kpi-val" id="kpi-ports">0</span>
+                <span class="ns-kpi-spark"><canvas data-spark="ports"></canvas></span>
+            </div>
+            <div class="ns-kpi rise d3">
+                <span class="ns-kpi-lbl">Active threats</span>
+                <span class="ns-kpi-val warn" id="kpi-threats">0</span>
+                <span class="ns-kpi-spark"><canvas data-spark="threats"></canvas></span>
+            </div>
+            <div class="ns-kpi rise d4">
+                <span class="ns-kpi-lbl">Avg latency</span>
+                <span class="ns-kpi-val" id="kpi-latency">0<small>ms</small></span>
+                <span class="ns-kpi-spark"><canvas data-spark="latency"></canvas></span>
+            </div>
+            <div class="ns-kpi rise d5">
+                <span class="ns-kpi-lbl">Throughput</span>
+                <span class="ns-kpi-val ok" id="kpi-tput">0<small>Mb/s</small></span>
+                <span class="ns-kpi-spark"><canvas data-spark="tput"></canvas></span>
+            </div>
+        </section>
+
+        <!-- ===== Main grid ===== -->
+        <section class="ns-grid">
+
+            <!-- Host table -->
+            <div class="panel ns-hosts rise" data-reveal>
+                <div class="panel-head">
+                    <span class="eyebrow">Discovered</span>
+                    <h2>Hosts <span class="ns-count" id="ns-host-count">0</span></h2>
+                    <div class="ns-filters" role="group" aria-label="Filter by risk">
+                        <button class="ns-filter is-on" data-filter="all">All</button>
+                        <button class="ns-filter" data-filter="critical">Critical</button>
+                        <button class="ns-filter" data-filter="elevated">Elevated</button>
+                        <button class="ns-filter" data-filter="safe">Safe</button>
+                    </div>
+                </div>
+                <div class="ns-table-scroll">
+                    <table class="ns-table">
+                        <thead>
+                            <tr>
+                                <th>Host</th>
+                                <th class="col-os">OS</th>
+                                <th class="col-ports">Ports</th>
+                                <th class="col-svc">Top service</th>
+                                <th>Risk</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ns-tbody"></tbody>
+                    </table>
+                    <p class="ns-empty" id="ns-empty" hidden>No hosts match this filter.</p>
+                </div>
+            </div>
+
+            <!-- Radar -->
+            <div class="panel ns-radar-panel rise" data-reveal>
+                <div class="panel-head">
+                    <span class="eyebrow">Sweep</span>
+                    <h2>Live radar</h2>
+                    <span class="chip" id="ns-radar-chip"><span class="ns-live-dot"></span>scanning</span>
+                </div>
+                <div class="ns-radar-stage">
+                    <canvas id="ns-radar" width="440" height="440" aria-label="Radar showing discovered hosts"></canvas>
+                    <div class="ns-radar-readout" id="ns-radar-readout">
+                        <span class="mono">hover a host</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Port scanner -->
+            <div class="panel ns-scanner rise" data-reveal>
+                <div class="panel-head">
+                    <span class="eyebrow">Tool</span>
+                    <h2>Port scanner</h2>
+                </div>
+                <div class="ns-scan-body">
+                    <form class="ns-scan-form" id="ns-scan-form" autocomplete="off">
+                        <label class="ns-field">
+                            <span>Target</span>
+                            <input type="text" id="ns-target" list="ns-hostlist" placeholder="10.10.42.0"
+                                spellcheck="false" inputmode="decimal">
+                            <datalist id="ns-hostlist"></datalist>
+                        </label>
+                        <label class="ns-field ns-field-range">
+                            <span>Range <b id="ns-range-lbl">1–1024</b></span>
+                            <input type="range" id="ns-range" min="128" max="1024" step="128" value="1024">
+                        </label>
+                        <button class="btn btn-primary" type="submit" id="ns-scan-btn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.3-4.3"></path>
+                            </svg>
+                            <span>Scan</span>
+                        </button>
+                    </form>
+
+                    <div class="ns-scan-progress" id="ns-scan-progress" hidden>
+                        <div class="ns-scan-meta">
+                            <span class="mono" id="ns-scan-status">probing…</span>
+                            <span class="mono" id="ns-scan-pct">0%</span>
+                        </div>
+                        <div class="ns-bar"><i id="ns-scan-fill"></i></div>
+                        <div class="ns-scan-cur mono" id="ns-scan-cur">port —</div>
+                    </div>
+
+                    <div class="ns-scan-results" id="ns-scan-results"></div>
+                </div>
+            </div>
+
+            <!-- Event log -->
+            <div class="panel ns-log rise" data-reveal>
+                <div class="panel-head">
+                    <span class="eyebrow">Stream</span>
+                    <h2>Event log</h2>
+                    <span class="chip" id="ns-log-rate"><span class="ns-live-dot"></span>live</span>
+                </div>
+                <ul class="ns-log-list" id="ns-log-list" aria-live="polite"></ul>
+            </div>
+
+        </section>
+
+        <p class="ns-disclaimer">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 16v-4M12 8h.01"></path>
+            </svg>
+            All telemetry on this page is synthesized in your browser for demonstration — NetSentry does not touch any real
+            network. It's a UI/UX study of how a security operations console could make live data readable at a glance.
+        </p>
+
+    </main>
+
+    <!-- ===== Host detail drawer ===== -->
+    <div class="ns-drawer" id="ns-drawer" aria-hidden="true">
+        <div class="ns-drawer-scrim" data-close></div>
+        <aside class="ns-drawer-panel" role="dialog" aria-modal="true" aria-labelledby="ns-drawer-title">
+            <header class="ns-drawer-head">
+                <div>
+                    <span class="eyebrow mono" id="ns-drawer-ip">—</span>
+                    <h3 id="ns-drawer-title">Host detail</h3>
+                </div>
+                <button class="ghost-icon" data-close aria-label="Close">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <path d="M18 6 6 18M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </header>
+            <div class="ns-drawer-body" id="ns-drawer-body"></div>
+        </aside>
+    </div>
+
+    <footer class="lab-footer">
+        <span>NetSentry — a project by <a href="../../index.html">Rahat</a>. Simulated, offline, no real hosts.</span>
+        <span class="f-note">HTML · CSS · JS — no frameworks · © <span id="year">2026</span></span>
+    </footer>
+
+    <script src="../_shared/lab.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

@@ -1,128 +1,889 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>rahat___69x</title>
+    <title>Rahat — Portfolio</title>
+    <meta name="description"
+        content="I'm Mahamudol Hasan Rahat, a CSE student passionate about web development and cybersecurity, building modern websites with HTML, CSS and JavaScript.">
+    <meta name="theme-color" content="#030303">
+    <meta property="og:title" content="Rahat — Portfolio">
+    <meta property="og:description"
+        content="CSE student building digital experiences with HTML, CSS and JavaScript — and learning cybersecurity along the way.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="assets/og.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="assets/og.jpg">
+    <link rel="icon"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23030303'/%3E%3Ctext x='32' y='45' font-family='Arial,sans-serif' font-size='38' font-weight='900' text-anchor='middle' fill='%2322d3ee'%3ER%3C/text%3E%3C/svg%3E">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&family=Geist+Mono:wght@400;500;600;700&family=Pacifico&family=Monoton&display=swap"
+        rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
+
+    <script>
+        // Apply saved theme before first paint to avoid a flash of the wrong theme
+        (function () {
+            var theme = "dark";
+            try { theme = localStorage.getItem("theme") || "dark"; } catch (e) { }
+            document.documentElement.setAttribute("data-theme", theme);
+
+            // hold hero entrance animations until the boot intro finishes
+            var rm = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+            if (!rm) document.documentElement.classList.add("boot-pending");
+        })();
+    </script>
 </head>
 
-<body>
+<body id="top">
 
-    <nav>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#education">Education</a>
-        <a href="#experience">Experience</a>
-        <a href="#contact">Contact</a>
-        <a href="#about">About</a>
-    </nav>
+    <a class="skip-link" href="#main">Skip to content</a>
 
-    <div class="card">
-
-        <img src="images/Thats my bulma.jpg" alt="Profile Picture">
-
-        <h1>👤 Rahat</h1>
-
-        <p>I am learning Web Development.</p>
-
-        <hr>
-
-        <h2 id="skills">My Skills</h2>
-
-        <ul>
-            <li>HTML</li>
-            <li>CSS</li>
-            <li>JavaScript</li>
-        </ul>
-
-        <hr>
-
-        <h2 id="projects">My Projects</h2>
-
-        <div class="project">
-            <h3>Digital Profile Card</h3>
-            <p>My first HTML & CSS project.</p>
-        </div>
-
-        <hr>
-
-        <h2 id="education">Education</h2>
-
-        <div class="education">
-            <h3>East West University</h3>
-            <p>B.Sc. in Computer Science & Engineering (CSE)</p>
-            <p>2025 - Present</p>
-        </div>
-
-        <hr>
-
-        <h2 id="contact">Contact Me</h2>
-
-        <div class="contact">
-            <p>📧 Email: your@email.com</p>
-            <p>📱 Phone: +880123456789</p>
-            <p>📍 Location: Narayanganj, Bangladesh</p>
-        </div>
-
-        <hr>
-        <footer>
-    <p>© 2026 Rahat | All Rights Reserved.</p>
-</footer>
-        
-<h2 id="experience">Experience</h2>
-
-<div class="experience">
-    <h3>Web Development Learner</h3>
-    <p>Learning HTML, CSS, JavaScript and Git.</p>
-    <p>2026 - Present</p>
-</div>
-
-        <h2>Social Links</h2>
-
-        <ol>
-            <li>
-                <a href="https://www.facebook.com/share/1E1rN27uXa/?mibextid=wwXIfr" target="_blank">
-                    Facebook
-                </a>
-            </li>
-
-            <li>
-                <a href="https://www.instagram.com/rahat___69x?igsh=b2xpc20wNW90cnZq&utm_source=qr" target="_blank">
-                    Instagram
-                </a>
-            </li>
-
-            <li>
-                <a href="https://github.com/Rahat69x" target="_blank">
-                    GitHub
-                </a>
-            </li>
-        </ol>
-
-        <br>
-
-        <button>WhatsApp</button>
-
-        <hr>
-
-        <h2 id="about">About Me</h2>
-
-        <p>
-            Hi! I'm Rahat, a Computer Science student at East West University.
-            I am passionate about Web Development and Cybersecurity.
-            Currently, I am learning HTML, CSS, JavaScript, and C++.
-        </p>
-
-        <!--
-        <br><br>
-        <a href="cv.pdf" download>
-            <button>Download CV</button>
-        </a>
-        -->
-
+    <!-- Boot intro -->
+    <div id="boot" hidden aria-hidden="true">
+        <pre id="boot-text"></pre>
     </div>
+
+    <!-- Custom cursor -->
+    <div class="cursor-dot" aria-hidden="true"></div>
+    <div class="cursor-ring" aria-hidden="true"></div>
+
+    <!-- Film grain -->
+    <div class="grain" aria-hidden="true"></div>
+
+    <!-- ================= HEADER ================= -->
+    <header class="site-header">
+        <nav class="nav padding-container max-container">
+
+            <a href="#top" class="brand">
+                <span class="brand-name">RAHAT</span>
+                <span class="brand-avatar"><img src="images/Thats my bulma.jpg" alt=""></span>
+            </a>
+
+            <ul class="nav-desktop">
+                <li><a class="nav-link" href="#projects">Projects</a></li>
+                <li><a class="nav-link" href="#about">About</a></li>
+                <li class="nav-cta-zone">
+                    <a class="nav-cta" href="#contact">Connect Now</a>
+                    <span class="nav-ghosts">
+                        <button class="ghost-icon music-toggle" aria-label="Toggle ambient music" aria-pressed="false">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15V6"></path>
+                                <path d="M18.5 18a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"></path>
+                                <path d="M12 12H3"></path>
+                                <path d="M16 6H3"></path>
+                                <path d="M12 18H3"></path>
+                            </svg>
+                        </button>
+                        <button class="theme-toggle ghost-icon" aria-label="Toggle dark / light theme">
+                            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round">
+                                <circle cx="12" cy="12" r="4"></circle>
+                                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+                            </svg>
+                            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                            </svg>
+                        </button>
+                    </span>
+                </li>
+            </ul>
+
+            <div class="nav-mobile">
+                <button class="ghost-icon music-toggle" aria-label="Toggle ambient music" aria-pressed="false">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15V6"></path>
+                        <path d="M18.5 18a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"></path>
+                        <path d="M12 12H3"></path>
+                        <path d="M16 6H3"></path>
+                        <path d="M12 18H3"></path>
+                    </svg>
+                </button>
+                <button class="theme-toggle ghost-icon" aria-label="Toggle dark / light theme">
+                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round">
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+                    </svg>
+                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+                <button class="ghost-icon" id="menu-toggle" aria-label="Open menu" aria-expanded="false"
+                    aria-controls="mobile-menu">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <line x1="4" y1="6" x2="20" y2="6"></line>
+                        <line x1="4" y1="12" x2="20" y2="12"></line>
+                        <line x1="4" y1="18" x2="20" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+        </nav>
+
+        <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
+            <a href="#projects">Projects</a>
+            <a href="#about">About</a>
+            <a href="#contact" class="mobile-cta">Connect Now</a>
+        </nav>
+    </header>
+
+    <div class="header-spacer"></div>
+
+    <main id="main" tabindex="-1">
+
+        <!-- ================= HERO ================= -->
+        <section class="hero">
+            <div class="blob hero-blob-1" data-parallax="0.12"></div>
+            <div class="blob hero-blob-2" data-parallax="-0.1"></div>
+
+            <div class="hero-inner padding-container max-container">
+
+                <div class="hero-left">
+
+                    <div class="avail-pill hero-fade delay-0">
+                        <span class="ping-wrap">
+                            <span class="ping"></span>
+                            <span class="ping-core"></span>
+                        </span>
+                        <span class="avail-text">Available for new projects</span>
+                    </div>
+
+                    <div class="hero-heading">
+                        <div class="hero-greet hero-fade-left delay-50">
+                            <p class="pacifico">Hi there! I'm Rahat</p>
+                            <span class="hand" aria-hidden="true">👋</span>
+                        </div>
+                        <h1 class="hero-title hero-fade-up delay-100">
+                            Building Digital<br class="lg-only">
+                            <span class="grad-hero"> Experiences.</span>
+                        </h1>
+                    </div>
+
+                    <div class="hero-typed hero-fade delay-150">
+                        <p aria-label="I'm a CSE student at East West University, passionate about building for the web.">
+                            <span id="typed" aria-hidden="true"></span><span class="type-cursor"
+                                aria-hidden="true">|</span>
+                        </p>
+                    </div>
+
+                    <div class="hero-btns hero-fade-up delay-200">
+                        <span class="btn-glow-wrap">
+                            <span class="btn-glow"></span>
+                            <a class="btn-dark" href="https://github.com/Rahat69x" target="_blank"
+                                rel="noopener noreferrer">
+                                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                    <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11.1 11.1 0 0 1 2.89-.39c.98 0 1.97.13 2.89.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.05.77 2.12 0 1.53-.01 2.76-.01 3.14 0 .3.2.66.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"></path>
+                                </svg>
+                                <span>View GitHub</span>
+                            </a>
+                        </span>
+                        <a class="btn-outline" href="#contact">
+                            <span>Contact Me</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M5 12h14"></path>
+                                <path d="m12 5 7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="hero-right hero-scale delay-100">
+                    <div class="hero-photo-glow"></div>
+                    <div class="hero-photo-wrap">
+                        <img class="hero-photo" src="images/Thats my bulma.jpg" fetchpriority="high"
+                            alt="Portrait of Mahamudol Hasan Rahat">
+
+                        <div class="float-card float-tl">
+                            <span class="fc-avatar"><img src="images/Thats my bulma.jpg" alt=""></span>
+                            <span class="fc-txt">
+                                <span class="fc-label">Education</span>
+                                <span class="fc-value">CSE @ EWU</span>
+                            </span>
+                        </div>
+
+                        <div class="float-card float-br">
+                            <span class="fc-txt fc-right">
+                                <span class="fc-label">Focus</span>
+                                <span class="fc-value">Web & Security</span>
+                            </span>
+                            <span class="fc-pulse"><span></span></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= STACK / ABOUT ================= -->
+        <section id="about" class="stack">
+            <div class="stack-sticky" id="stack-sticky">
+
+                <div class="stack-bg">
+                    <div class="blob stack-blob-1"></div>
+                    <div class="blob stack-blob-2"></div>
+                    <div class="blob stack-blob-3"></div>
+                    <div class="grid-bg" id="grid-bg"></div>
+                </div>
+
+                <h2 class="stack-heading">
+                    <span>Languages,</span>
+                    <span class="grad-stack">Frameworks<br class="md-only"> &amp; other</span>
+                    <span>Tools</span>
+                </h2>
+
+                <div class="stack-center">
+                    <div class="stack-panel">
+                        <p class="stack-line">I love the web,</p>
+                        <p class="stack-line">I love figuring out how things work</p>
+                        <p class="stack-line">and I'm in love with code</p>
+                        <div class="grip-wrap">
+                            <span class="grip-btn" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    aria-hidden="true">
+                                    <circle cx="5" cy="5" r="1"></circle>
+                                    <circle cx="12" cy="5" r="1"></circle>
+                                    <circle cx="19" cy="5" r="1"></circle>
+                                    <circle cx="5" cy="12" r="1"></circle>
+                                    <circle cx="12" cy="12" r="1"></circle>
+                                    <circle cx="19" cy="12" r="1"></circle>
+                                    <circle cx="5" cy="19" r="1"></circle>
+                                    <circle cx="12" cy="19" r="1"></circle>
+                                    <circle cx="19" cy="19" r="1"></circle>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stack-cards" role="group" aria-label="Languages and tools">
+                    <div class="tool-card tc-1">
+                        <div class="tool-inner"><span class="tool-logo lg-html">&lt;/&gt;</span><span
+                                class="tool-name">HTML5</span></div>
+                    </div>
+                    <div class="tool-card tc-2">
+                        <div class="tool-inner"><span class="tool-logo lg-css">{ }</span><span
+                                class="tool-name">CSS3</span></div>
+                    </div>
+                    <div class="tool-card tc-3">
+                        <div class="tool-inner"><span class="tool-logo lg-js">JS</span><span
+                                class="tool-name">JavaScript</span></div>
+                    </div>
+                    <div class="tool-card tc-4">
+                        <div class="tool-inner"><span class="tool-logo lg-git">git</span><span
+                                class="tool-name">Git</span></div>
+                    </div>
+                    <div class="tool-card tc-5">
+                        <div class="tool-inner"><span class="tool-logo lg-gh">
+                                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                    <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11.1 11.1 0 0 1 2.89-.39c.98 0 1.97.13 2.89.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.05.77 2.12 0 1.53-.01 2.76-.01 3.14 0 .3.2.66.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"></path>
+                                </svg></span><span class="tool-name">GitHub</span></div>
+                    </div>
+                    <div class="tool-card tc-6">
+                        <div class="tool-inner"><span class="tool-logo lg-sec">🔐</span><span
+                                class="tool-name">Cybersecurity</span></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= PROJECTS ================= -->
+        <section id="projects" class="projects max-container">
+
+            <div class="proj-header padding-container">
+
+                <div class="scanlines" aria-hidden="true">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+
+                <div class="ph-left reveal-left">
+                    <div class="ph-num-zone">
+                        <div class="ph-num-glow"></div>
+                        <span class="monoton grad-warm ph-counter" id="proj-counter" aria-hidden="true">00</span>
+                        <span class="sr-only">3 projects completed</span>
+                        <div class="ph-pill-zone">
+                            <div class="ph-pill">
+                                <span class="ping-mini"></span>
+                                <span>Projects</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ph-center reveal">
+                    <h2 class="monoton grad-warm ph-title">WORK<br>DONE</h2>
+                    <div class="ph-sub">
+                        <span class="ph-line"></span>
+                        <p>Portfolio Archive</p>
+                        <span class="ph-line"></span>
+                    </div>
+                </div>
+
+                <div class="ph-right reveal-right" aria-hidden="true">
+                    <div class="holo">
+                        <div class="holo-base"></div>
+                        <div class="holo-monolith">
+                            <span class="holo-scan"></span>
+                        </div>
+                        <div class="holo-glow"></div>
+                        <span class="particle pt-1"></span>
+                        <span class="particle pt-2"></span>
+                        <span class="particle pt-3"></span>
+                        <span class="particle pt-4"></span>
+                        <span class="particle pt-5"></span>
+                        <span class="particle pt-6"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="proj-list padding-container">
+
+                <!-- PRJ 01 -->
+                <article class="proj-card">
+
+                    <div class="proj-text reveal-left">
+                        <h2>portfolio website</h2>
+                        <p>
+                            My personal corner of the internet — the site you're looking at right now.
+                            Designed and built from scratch with plain HTML, CSS and JavaScript:
+                            dark &amp; light themes, typing effects, scroll animations and a fully
+                            responsive layout. No frameworks, no build step.
+                        </p>
+
+                        <div class="proj-cred-box">
+                            <div class="cred-row">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="cred-ic cyan" aria-hidden="true">
+                                    <polyline points="16 18 22 12 16 6"></polyline>
+                                    <polyline points="8 6 2 12 8 18"></polyline>
+                                </svg>
+                                <span class="cred-lbl">Built:</span>
+                                <span class="cred-val cyan">HTML · CSS · JS</span>
+                            </div>
+                            <div class="cred-row">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="cred-ic purple" aria-hidden="true">
+                                    <rect x="3" y="11" width="18" height="11" rx="2"></rect>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                                <span class="cred-lbl">Status:</span>
+                                <span class="cred-val purple">Live &amp; evolving</span>
+                            </div>
+                        </div>
+
+                        <div class="proj-actions">
+                            <a class="btn-square" href="https://github.com/Rahat69x" target="_blank"
+                                rel="noopener noreferrer">View Project</a>
+                        </div>
+                    </div>
+
+                    <div class="proj-media reveal-right" data-tilt>
+                        <div class="proj-badges">
+                            <div class="badge-prj">
+                                <span class="prj-lbl">PRJ</span>
+                                <span class="prj-no">01</span>
+                            </div>
+                            <div class="badge-status-ring">
+                                <div class="badge-status">
+                                    <span class="ping-mini emerald"></span>
+                                    <span>personal</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="proj-shot" aria-hidden="true">
+                            <div class="mock-browser">
+                                <div class="mock-bar">
+                                    <span class="mb-dot red"></span>
+                                    <span class="mb-dot yellow"></span>
+                                    <span class="mb-dot green"></span>
+                                    <span class="mock-url">rahat.dev</span>
+                                </div>
+                                <div class="mock-body">
+                                    <div class="mock-blob mock-blob-1"></div>
+                                    <div class="mock-blob mock-blob-2"></div>
+                                    <div class="mock-nav">
+                                        <span class="mock-logo">RAHAT</span>
+                                        <span class="mock-links"><i></i><i></i><i></i></span>
+                                    </div>
+                                    <div class="mock-hero">
+                                        <span class="mock-pill">● AVAILABLE</span>
+                                        <span class="mock-title">Building Digital<br><em>Experiences.</em></span>
+                                        <span class="mock-lines"><i></i><i></i></span>
+                                        <span class="mock-btns"><i class="solid"></i><i></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </article>
+
+                <!-- PRJ 02 — NetSentry (concept) -->
+                <article class="proj-card flip">
+
+                    <div class="proj-text reveal-right">
+                        <h2>NetSentry</h2>
+                        <p>
+                            A network monitoring dashboard concept — live port-scan visualisation,
+                            service fingerprints and anomaly alerts on a dark ops console. Designed
+                            to make security data feel readable at a glance.
+                        </p>
+
+                        <div class="proj-cred-box">
+                            <div class="cred-row">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="cred-ic cyan" aria-hidden="true">
+                                    <polyline points="16 18 22 12 16 6"></polyline>
+                                    <polyline points="8 6 2 12 8 18"></polyline>
+                                </svg>
+                                <span class="cred-lbl">Built:</span>
+                                <span class="cred-val cyan">HTML · CSS · JS</span>
+                            </div>
+                            <div class="cred-row">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="cred-ic purple" aria-hidden="true">
+                                    <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1 1 0 0 1 1.52 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1z"></path>
+                                </svg>
+                                <span class="cred-lbl">Status:</span>
+                                <span class="cred-val purple">concept build</span>
+                            </div>
+                        </div>
+
+                        <div class="proj-actions">
+                            <a class="btn-square" href="projects/netsentry/index.html">Launch Console</a>
+                        </div>
+                    </div>
+
+                    <div class="proj-media reveal-left" data-tilt>
+                        <div class="proj-badges">
+                            <div class="badge-prj">
+                                <span class="prj-lbl">PRJ</span>
+                                <span class="prj-no">02</span>
+                            </div>
+                            <div class="badge-status-ring violet">
+                                <div class="badge-status">
+                                    <span class="ping-mini violet"></span>
+                                    <span class="violet-txt">concept</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="proj-shot" aria-hidden="true">
+                            <div class="mock-dash">
+                                <div class="mock-bar">
+                                    <span class="mb-dot red"></span>
+                                    <span class="mb-dot yellow"></span>
+                                    <span class="mb-dot green"></span>
+                                    <span class="mock-url">netsentry — ops console</span>
+                                </div>
+                                <div class="dash-body">
+                                    <div class="dash-side">
+                                        <i class="on"></i><i></i><i></i><i></i>
+                                    </div>
+                                    <div class="dash-main">
+                                        <div class="dash-tiles">
+                                            <div class="dash-tile">
+                                                <span class="dt-label">Open Ports</span>
+                                                <span class="dt-value">14</span>
+                                                <span class="dt-bar"><i style="width:46%"></i></span>
+                                            </div>
+                                            <div class="dash-tile">
+                                                <span class="dt-label">Threats</span>
+                                                <span class="dt-value warn">02</span>
+                                                <span class="dt-bar"><i class="warn" style="width:18%"></i></span>
+                                            </div>
+                                            <div class="dash-tile">
+                                                <span class="dt-label">Uptime</span>
+                                                <span class="dt-value ok">99.9%</span>
+                                                <span class="dt-bar"><i class="ok" style="width:92%"></i></span>
+                                            </div>
+                                        </div>
+                                        <div class="dash-lower">
+                                            <div class="dash-radar">
+                                                <span class="radar-sweep"></span>
+                                                <span class="radar-ring r1"></span>
+                                                <span class="radar-ring r2"></span>
+                                                <span class="radar-blip b1"></span>
+                                                <span class="radar-blip b2"></span>
+                                                <span class="radar-blip b3"></span>
+                                            </div>
+                                            <pre class="dash-log"><span class="lg-ok">✔</span> 192.168.0.12 — ssh · fingerprinted
+<span class="lg-ok">✔</span> 192.168.0.31 — https · cert valid
+<span class="lg-warn">▲</span> 192.168.0.77 — telnet · flagged
+<span class="lg-info">…</span> sweeping subnet /24</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </article>
+
+                <!-- PRJ 03 — CipherNote (concept) -->
+                <article class="proj-card">
+
+                    <div class="proj-text reveal-left">
+                        <h2>CipherNote</h2>
+                        <p>
+                            An encrypted notes app concept. Notes stay scrambled until you hold the
+                            key — then they decrypt in place. A small playground for security UX,
+                            keyboard-first flows and a well-crafted dark editor.
+                        </p>
+
+                        <div class="proj-cred-box">
+                            <div class="cred-row">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="cred-ic cyan" aria-hidden="true">
+                                    <polyline points="16 18 22 12 16 6"></polyline>
+                                    <polyline points="8 6 2 12 8 18"></polyline>
+                                </svg>
+                                <span class="cred-lbl">Built:</span>
+                                <span class="cred-val cyan">HTML · CSS · JS</span>
+                            </div>
+                            <div class="cred-row">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="cred-ic purple" aria-hidden="true">
+                                    <rect x="3" y="11" width="18" height="11" rx="2"></rect>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                                <span class="cred-lbl">Status:</span>
+                                <span class="cred-val purple">concept build</span>
+                            </div>
+                        </div>
+
+                        <div class="proj-actions">
+                            <a class="btn-square" href="projects/ciphernote/index.html">Launch Vault</a>
+                        </div>
+                    </div>
+
+                    <div class="proj-media reveal-right" data-tilt>
+                        <div class="proj-badges">
+                            <div class="badge-prj">
+                                <span class="prj-lbl">PRJ</span>
+                                <span class="prj-no">03</span>
+                            </div>
+                            <div class="badge-status-ring violet">
+                                <div class="badge-status">
+                                    <span class="ping-mini violet"></span>
+                                    <span class="violet-txt">concept</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="proj-shot" aria-hidden="true">
+                            <div class="mock-note">
+                                <div class="mock-bar">
+                                    <span class="mb-dot red"></span>
+                                    <span class="mb-dot yellow"></span>
+                                    <span class="mb-dot green"></span>
+                                    <span class="mock-url">ciphernote — vault</span>
+                                </div>
+                                <div class="note-body">
+                                    <div class="note-list">
+                                        <div class="note-item active"><i></i>ideas.enc</div>
+                                        <div class="note-item"><i></i>passwords.enc</div>
+                                        <div class="note-item"><i></i>journal.enc</div>
+                                    </div>
+                                    <div class="note-editor">
+                                        <div class="note-head">
+                                            <span class="note-title">ideas.enc</span>
+                                            <span class="note-lock">🔒 AES-256</span>
+                                        </div>
+                                        <p class="note-line plain">Ship the portfolio. Then break it (safely).</p>
+                                        <p class="note-line">X9f#kQ2@Lm!vR8&amp;cT4$wZ7*pE3^bN6</p>
+                                        <p class="note-line">aH5%dJ1@sK8!fG3&amp;lP9$qW2*xC7^vB4</p>
+                                        <p class="note-line">mT6#nY3@rU9!eI2&amp;oA5$zS8*hD1^jF7</p>
+                                        <span class="note-status">3 of 4 lines locked · hold key to decrypt</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </article>
+
+                <!-- PRJ 04 — Coming soon -->
+                <article class="proj-card flip">
+
+                    <div class="proj-text reveal-right">
+                        <h2>coming soon</h2>
+                        <p>
+                            The next project is already brewing. I'm currently learning,
+                            experimenting and building — and whatever ships next will land
+                            right here in the archive. Stay tuned.
+                        </p>
+
+                        <div class="proj-cred-box">
+                            <div class="cred-row">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="cred-ic cyan" aria-hidden="true">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                                <span class="cred-lbl">ETA:</span>
+                                <span class="cred-val cyan">loading…</span>
+                            </div>
+                            <div class="cred-row">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="cred-ic purple" aria-hidden="true">
+                                    <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+                                </svg>
+                                <span class="cred-lbl">Mode:</span>
+                                <span class="cred-val purple">building in silence</span>
+                            </div>
+                        </div>
+
+                        <div class="proj-actions">
+                            <a class="btn-square" href="https://github.com/Rahat69x" target="_blank"
+                                rel="noopener noreferrer">Watch on GitHub</a>
+                        </div>
+                    </div>
+
+                    <div class="proj-media reveal-left" data-tilt>
+                        <div class="proj-badges">
+                            <div class="badge-prj">
+                                <span class="prj-lbl">PRJ</span>
+                                <span class="prj-no">04</span>
+                            </div>
+                            <div class="badge-status-ring amber">
+                                <div class="badge-status">
+                                    <span class="ping-mini amber"></span>
+                                    <span class="amber-txt">in progress</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="proj-shot" aria-hidden="true">
+                            <div class="mock-terminal">
+                                <div class="mock-bar">
+                                    <span class="mb-dot red"></span>
+                                    <span class="mb-dot yellow"></span>
+                                    <span class="mb-dot green"></span>
+                                    <span class="mock-url">rahat@dev: ~/next-project</span>
+                                </div>
+                                <pre class="term-body"><span class="t-green">rahat@dev</span>:<span class="t-blue">~</span>$ whoami
+CSE student · frontend dev · security learner
+
+<span class="t-green">rahat@dev</span>:<span class="t-blue">~</span>$ next-project --status
+[<span class="t-cyan">▓▓▓▓▓░░░░░░░</span>] compiling ideas…
+
+<span class="t-green">rahat@dev</span>:<span class="t-blue">~</span>$ <span class="term-cursor">█</span></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                </article>
+
+            </div>
+
+            <div class="explore-zone">
+                <a class="btn-explore" href="https://github.com/Rahat69x" target="_blank" rel="noopener noreferrer">
+                    Explore All Projects
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" aria-hidden="true">
+                        <path d="m9 18 6-6-6-6"></path>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="reached padding-container reveal">
+                <h2 class="grad-reached">Wow! You've reached this part?</h2>
+                <p class="reached-p">
+                    I appreciate your time and visit. I'm open to collaborating, learning
+                    and building. <a href="#contact">Hit me up</a> <span class="bow">🙇‍♂️</span>
+                </p>
+            </div>
+
+        </section>
+
+        <!-- ================= CONTACT ================= -->
+        <section id="contact" class="contact">
+
+            <div class="blob contact-blob-1" data-parallax="0.1"></div>
+            <div class="blob contact-blob-2" data-parallax="-0.08"></div>
+
+            <div class="max-container padding-container contact-inner">
+
+                <div class="contact-head reveal">
+                    <div class="spark-pill">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path>
+                            <path d="M20 3v4"></path>
+                            <path d="M22 5h-4"></path>
+                        </svg>
+                        AVAILABLE FOR NEW PROJECTS
+                    </div>
+                    <h2 class="contact-title">Let's turn your vision<br>into reality.</h2>
+                </div>
+
+                <div class="contact-grid">
+
+                    <div class="email-card reveal-left">
+                        <div class="ec-top">
+                            <div class="ec-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                    <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11.1 11.1 0 0 1 2.89-.39c.98 0 1.97.13 2.89.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.05.77 2.12 0 1.53-.01 2.76-.01 3.14 0 .3.2.66.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3>Find Me on GitHub</h3>
+                                <p>Everything I build lands here first</p>
+                            </div>
+                        </div>
+
+                        <div class="ec-box">
+                            <div class="ec-mail">
+                                <span class="ec-lbl">GitHub Profile</span>
+                                <span class="ec-val">github.com/Rahat69x</span>
+                            </div>
+                            <a class="ec-copy" href="https://github.com/Rahat69x" target="_blank"
+                                rel="noopener noreferrer">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M15 3h6v6"></path>
+                                    <path d="M10 14 21 3"></path>
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                </svg>
+                                <span>OPEN PROFILE</span>
+                            </a>
+                        </div>
+
+                        <div class="ec-blob"></div>
+                    </div>
+
+                    <div class="contact-side">
+
+                        <a class="side-card reveal-right" href="https://wa.me/880123456789" target="_blank"
+                            rel="noopener noreferrer">
+                            <div class="sc-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="sc-wa" aria-hidden="true">
+                                    <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path>
+                                </svg>
+                            </div>
+                            <div class="sc-txt">
+                                <h3>WhatsApp</h3>
+                                <p>Direct chat for quick response</p>
+                                <span>+880 123 456 789</span>
+                            </div>
+                            <div class="sc-arrow">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M15 3h6v6"></path>
+                                    <path d="M10 14 21 3"></path>
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                </svg>
+                            </div>
+                            <div class="sc-spark">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path>
+                                </svg>
+                            </div>
+                        </a>
+
+                        <div class="side-card reveal-right">
+                            <div class="sc-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="sc-pin" aria-hidden="true">
+                                    <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0Z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                            </div>
+                            <div class="sc-txt">
+                                <h3>Location</h3>
+                                <p>Where I'm based</p>
+                                <span>Narayanganj, Bangladesh</span>
+                            </div>
+                            <div class="sc-spark">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="status-card reveal-right">
+                            <div class="st-col">
+                                <span class="st-lbl">Current Status</span>
+                                <div class="st-row">
+                                    <span class="ping-mini green"></span>
+                                    <span class="st-green">Open to Collabs &amp; Learning</span>
+                                </div>
+                            </div>
+                            <div class="st-col st-end">
+                                <span class="st-lbl">Studying</span>
+                                <span class="st-italic">CSE @ East West University</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= SIGNATURE ================= -->
+        <section class="signature" aria-hidden="true">
+            <canvas id="sig-canvas"></canvas>
+        </section>
+
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+        <div class="padding-container max-container footer-inner">
+
+            <div class="f-left">
+                <div class="f-socials">
+                    <a href="https://github.com/Rahat69x" target="_blank" rel="noopener noreferrer"
+                        aria-label="GitHub">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11.1 11.1 0 0 1 2.89-.39c.98 0 1.97.13 2.89.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.05.77 2.12 0 1.53-.01 2.76-.01 3.14 0 .3.2.66.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"></path>
+                        </svg>
+                    </a>
+                    <a href="https://wa.me/880123456789" target="_blank" rel="noopener noreferrer"
+                        aria-label="WhatsApp">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                    </a>
+                </div>
+                <p class="f-copy">© <span id="year">2026</span> Mahamudol Hasan Rahat. All rights reserved.</p>
+            </div>
+
+            <div class="f-mid">
+                <a href="#projects">Projects</a>
+                <a href="#top">Back to Top</a>
+            </div>
+
+            <div class="f-right">
+                <span class="f-hire">Available for Hire</span>
+                <span class="f-mail">github.com/Rahat69x</span>
+            </div>
+
+        </div>
+    </footer>
 
     <script src="script.js"></script>
 
